@@ -3,6 +3,7 @@ import os
 from flask import Flask, request, jsonify
 import pandas as pd
 from dotenv import load_dotenv
+from io import StringIO
 
 load_dotenv()
 
@@ -11,14 +12,13 @@ app.config['SECRET_KEY'] = os.getenv('API_SECRET_KEY')
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    if 'file' not in request.files:
-        return jsonify({'error': 'No file part'}), 400
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
+    if not request.data:
+        return jsonify({'error': 'No file data in request body'}), 400
 
     try:
-        df = pd.read_csv(file)
+        # Read the raw request data and wrap it in an in-memory text buffer
+        csv_data = request.get_data(as_text=True)
+        df = pd.read_csv(StringIO(csv_data))
         
         missing_values_before = df.isnull().sum().to_dict()
         

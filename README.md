@@ -1,3 +1,4 @@
+
 # Python CSV Data Cleaner API
 
 A simple web API built with Flask to clean and analyze CSV data.
@@ -9,12 +10,29 @@ A simple web API built with Flask to clean and analyze CSV data.
 -   Fills missing values in numerical columns with the column's mean.
 -   Provides a data summary of the cleaned data.
 
+## Project Structure
+
+```
+├── .env.example
+├── .gitignore
+├── README.md
+├── requirements.txt
+├── sample_data.csv
+├── src
+│   ├── __init__.py
+│   ├── config.py
+│   ├── data_cleaner.py
+│   ├── main.py
+├── tests
+│   └── test_data_cleaner.py
+```
+
 ## Setup and Installation
 
 1.  **Clone the repository:**
     ```bash
     git clone <repository-url>
-    cd python-csv-cleaner
+    cd Web-API-utilisation-in-Python-using-Flask
     ```
 
 2.  **Create a virtual environment:**
@@ -34,6 +52,19 @@ A simple web API built with Flask to clean and analyze CSV data.
         cp .env.example .env
         ```
     -   Update the `.env` file with your secret key.
+
+5.  **Run the application:**
+    ```bash
+    python src/main.py
+    ```
+
+## Running the Tests
+
+To run the tests, use `pytest`:
+
+```bash
+pytest
+```
 
 ## API Endpoints
 
